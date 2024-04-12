@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,78 +14,32 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@Entity
 public class Customer {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "customer_id")
+	private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Column(nullable = false)
+	private String name;
 
-    @Nonnull
-    private String name;
+	@Column(unique = true)
+	private String email;
 
-    @Column(unique = true)
-    private String email;
+	@JsonIgnoreProperties // Exclude password from JSON serialization for security
+	private String password;
 
-    @JsonIgnoreProperties // Exclude password from JSON serialization for security
-    private String password;
+	private String address;
 
-    private String address;
+	 
 
-    // Add other relevant customer attributes like phone number etc.
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Wishlist> wishlistItems;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Wishlist> wishlistItems;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public List<Wishlist> getWishlistItems() {
-		return wishlistItems;
-	}
-
-	public void setWishlistItems(List<Wishlist> wishlistItems) {
-		this.wishlistItems = wishlistItems;
-	}
 
 	public Customer(Long id, String name, String email, String password, String address, List<Wishlist> wishlistItems) {
 		super();
@@ -100,6 +54,11 @@ public class Customer {
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Customer save(Customer newCustomer) {
+		// TODO Auto-generated method stub
+		return null;
 	}
     
     

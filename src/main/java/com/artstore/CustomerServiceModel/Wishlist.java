@@ -8,9 +8,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
- 
+
+@Getter
 @Entity
+@Setter
 public class Wishlist 
 {
 	@Id
@@ -20,6 +24,7 @@ public class Wishlist
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
+
 
 	@Column(name = "product_id")
 	private Long productId;
@@ -36,30 +41,6 @@ public class Wishlist
 		// TODO Auto-generated constructor stub
 	}
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public Long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
-	
-	
 	
 }

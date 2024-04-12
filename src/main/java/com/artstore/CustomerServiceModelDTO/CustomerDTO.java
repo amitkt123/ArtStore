@@ -1,13 +1,15 @@
 package com.artstore.CustomerServiceModelDTO;
 
 import com.artstore.CustomerServiceModel.Customer;
+import java.util.*;
 
+import com.artstore.CustomerServiceModel.Wishlist;
 import lombok.Getter;
 import lombok.Setter;
 
 
 @Setter
-@Getter // Automatically generates getters for all fields
+@Getter
 public class CustomerDTO 
 {
 
@@ -18,59 +20,25 @@ public class CustomerDTO
     private String email;
 
     private String address;
-    
-  
-    // Add other relevant customer details for DTO
 
-    public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public String getAddress() {
-		return address;
-	}
-
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	private List<WishlistDTO> wishList;
 
 
 	public CustomerDTO(Customer customer) {
-    	 
-        this.id = customer.getId();
-        this.name = customer.getName();
-        this.email = customer.getEmail();
-        this.address = customer.getAddress();
-        // Map other relevant customer details
-    }
+		this.id = customer.getId();
+		this.name = customer.getName();
+		this.email = customer.getEmail();
+		this.address = customer.getAddress();
 
+		// Convert List<Wishlist> to List<WishlistDTO>
+		List<Wishlist> wishlistItems = customer.getWishlistItems();
+		List<WishlistDTO> wishlistDTOs = new ArrayList<>();
+		for (Wishlist wishlist : wishlistItems) {
+			WishlistDTO wishlistDTO = new WishlistDTO(wishlist);
+			wishlistDTOs.add(wishlistDTO);
+		}
+		this.wishList = wishlistDTOs;
+	}
 
 	public CustomerDTO() {
 		super();

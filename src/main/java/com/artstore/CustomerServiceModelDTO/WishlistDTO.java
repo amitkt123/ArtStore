@@ -1,5 +1,8 @@
 package com.artstore.CustomerServiceModelDTO;
 
+import com.artstore.CustomerServiceModel.Customer;
+import com.artstore.CustomerServiceModel.Wishlist;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,35 +10,27 @@ import lombok.Setter;
 @Getter // Automatically generates getters for all fields
 public class WishlistDTO {
 
-    private Long id;
+	private Long id;
 
-    private Long productId;
+	private Customer customer; // Assuming you need the customer ID in the DTO
 
-	public Long getId() {
-		return id;
-	}
+	private Long productId;
 
-	public void setId(Long id) {
+	public WishlistDTO(Long id, Customer customer, Long productId) {
 		this.id = id;
-	}
-
-	public Long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Long productId) {
+		this.customer = customer;
 		this.productId = productId;
 	}
-
-	public WishlistDTO(Long id, Long productId) {
-		super();
-		this.id = id;
-		this.productId = productId;
+	
+	public WishlistDTO(Wishlist wishlist) {
+		this.id = wishlist.getId();
+		this.customer = wishlist.getCustomer();
+		this.productId = wishlist.getProductId();
+	
 	}
+
 
 	public WishlistDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+		// Default constructor
 	}
-    
 }
