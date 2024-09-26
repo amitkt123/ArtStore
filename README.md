@@ -35,7 +35,11 @@ ArtStore is a Monolithic Spring Boot application designed to manage an online ar
    cd ArtStore
 
 ## configure Database
-spring.datasource.url=jdbc:mysql://localhost:3306/artstore_db
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
+- spring.datasource.url=jdbc:mysql://localhost:3306/artstore_db
+- spring.datasource.username=your_username
+- spring.datasource.password=your_password
+- spring.jpa.hibernate.ddl-auto=update
+## Further Enhancements
+- Implement user authentication for personalized shopping experiences.
+- Add review and rating features for artworks.
+- Integrate with a third-party shipping service for real-time shipping updates.
